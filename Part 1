@@ -1,0 +1,59 @@
+clc; clear;
+
+layout = zeros(6,7);
+
+function [layout] = FindPieces(filename)
+file = input('Enter image file name: ', 's');
+img = imread(file);
+
+[h,w,c] = size(img);
+imgCopy = uint8(zeros(h,w,c)); 
+binary = false(h,w);
+
+for ii = 1:h
+    for jj = 1:w
+        if img(ii,jj,1) == 52 && img(ii,jj,2) == 54 && img(ii,jj,3) == 58
+            binary(ii,jj) = 1; 
+        end 
+        if binary(ii,jj) == 0
+            imgCopy(ii,jj,:) = 255;
+        end
+        if img(ii,jj,1) == 0 && img(ii,jj,2) == 200 && img(ii,jj,3) == 255
+            imgCopy(ii,jj,:) = img(ii,jj,:);
+        end 
+        if img(ii,jj,:) == img(ii,jj,:)
+        end 
+    end 
+end 
+
+[rows, columns] = find(binary);
+topRow = min(rows);
+bottomRow = max(rows);
+leftColumn = min(columns);
+rightColumn = max(columns); 
+
+matrix = zeros();
+x = 1; 
+
+for ii = topRow + 69:100:770 + topRow
+    for jj = rightColumn-854+65:125:rightColumn
+        if imgCopy(ii,jj,2) == 200
+            matrix(x) = 1;
+            x = x + 1; 
+        elseif imgCopy(ii,jj,2) == 205 
+            matrix(x) = 2;
+            x = x + 1;
+        else 
+            x = x + 1; 
+        end 
+    end 
+end 
+
+x2 = 1;
+for lay_row = 1:1:6
+    for lay_col = 1:1:7
+        layout(lay_row, lay_col) = matrix(x2);
+        x2 = x2 + 1;
+    end 
+end 
+end
