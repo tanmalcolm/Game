@@ -1,0 +1,52 @@
+clc; clear;
+
+function [score] = ScoreLayout(layout)
+x = 0;
+x2 = 0;
+
+for ii = 1:1:6
+    for jj = 1:1:7
+        if jj<=3
+            if layout(ii,jj) == 1 && layout(ii,jj) == layout(ii,jj+1) && layout(ii,jj) == layout(ii,jj+2) && layout(ii,jj) == layout(ii,jj+3)
+                x = x + 1;
+            end 
+        end 
+        if jj<=3
+            if layout(ii,jj) == 2 && layout(ii,jj) == layout(ii,jj+1) && layout(ii,jj) == layout(ii,jj+2) && layout(ii,jj) == layout(ii,jj+3)
+                x2 = x2 + 1;
+            end 
+        end 
+        if ii<=3
+            if layout(ii,jj) == 1 && layout(ii,jj) == layout(ii+1,jj) && layout(ii,jj) == layout(ii+2,jj) && layout(ii,jj) == layout(ii+3,jj)
+                x = x + 1;
+            end 
+        end 
+        if ii<=3
+            if layout(ii,jj) == 2 && layout(ii,jj) == layout(ii+1,jj) && layout(ii,jj) == layout(ii+2,jj) && layout(ii,jj) == layout(ii+3,jj)
+                x2 = x2 + 1; 
+            end 
+        end 
+        if ii<=3 
+            if layout(ii,jj) == 1 && layout(ii+1,jj+1) == 1 && layout(ii+2,jj+2) == 1 && layout(ii+3,jj+3) == 1
+                x + x + 1;
+            end 
+        end 
+        if ii<=3
+            if layout(ii,jj) == 2 && layout(ii+1,jj+1) == 2 && layout(ii+2,jj+2) == 2 && layout(ii+3,jj+3) == 2
+                x2 = x2 + 1;
+            end 
+        end 
+        if jj>3 && ii>=3
+            if layout(ii,jj) == 1 && layout(ii-1,jj-1) == 1 && layout(ii-2,jj-2) == 1 && layout(ii-3,jj-3) == 1
+                x = x + 1;
+            end 
+        end 
+        if jj>3 && ii>=3
+            if layout(ii,jj) == 2 && layout(ii-1,jj-1) == 2 && layout(ii-2,jj-2) == 2 && layout(ii-3,jj-3) == 2
+                x2 = x2 + 1;
+            end 
+        end 
+    end 
+end 
+score = [x, x2];
+end
